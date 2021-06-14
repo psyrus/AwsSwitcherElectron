@@ -1,0 +1,23 @@
+{
+  "name": "awsswitcherelectron",
+  "version": "1.0.0",
+  "description": "Electron application that will allow a user to start and stop their virtual machines easily",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/psyrus/AwsSwitcherElectron.git"
+  },
+  "author": "Trevor Chinn",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/psyrus/AwsSwitcherElectron/issues"
+  },
+  "homepage": "https://github.com/psyrus/AwsSwitcherElectron#readme",
+  "devDependencies": {
+    "electron": "^13.1.2"
+  }
+}
