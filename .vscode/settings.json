@@ -1,0 +1,6 @@
+{
+    "editor.formatOnSave": true,
+    "javascript.referencesCodeLens.showOnAllFunctions": true,
+    "javascript.referencesCodeLens.enabled": true,
+    "javascript.suggest.completeFunctionCalls": true
+}

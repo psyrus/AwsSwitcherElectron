@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=@, initial-scale=1.0">
+    <title>Browser Window App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <h1>AWS Switcher 2</h1>
+    <div id="settingsButtonContainer">
+        <button id="settingsBtn">Settings</button>
+    </div>
+    <div id="instanceInfoContainer">
+        <table class="instanceInfo">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>State</th>
+                    <th>IP</th>
+                    <th>Last Change Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td id="instanceName">Loading...</td>
+                    <td id="instanceState">Loading...</td>
+                    <td id="instanceIp">Loading...</td>
+                    <td id="instanceLastChanged">Loading...</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="toggleStateContainer">
+        <button id="toggleStateBtn">State Change Text</button>
+        <label for="connectVpn">Connect to VPN Automatically</label>
+        <input type="checkbox" id="connectVpn" name="connectVpn" value="yes">
+        <label for="startSquad">Start Squad Automatically</label>
+        <input type="checkbox" id="startSquad" name="startSquad" value="yes">
+    </div>
+    <script>
+        require("./index.js");
+    </script>
+</body>
+
+</html>
