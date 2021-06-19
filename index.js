@@ -134,7 +134,7 @@ settingsBtn.addEventListener("click", function () {
 toggleStateBtn.addEventListener("click", function () {
     console.log(instance.State.Name)
     console.log(stateEnum.Running)
-
+    toggleStateBtn.disabled = true;
     if (instance.State.Name == stateEnum.Stopped) {
         startInstance();
     } else {
