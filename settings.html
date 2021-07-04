@@ -11,15 +11,18 @@
 
 <body>
     <h1>Settings</h1>
-    <div>
-        <label for="username">API Username</label>
-        <input type="text" id="username" name="username">
+    <div class="settingsList">
+        <label for="AccessKeyId">API Username</label>
+        <input type="text" id="AccessKeyId" name="AccessKeyId">
         <label for="key">API Key</label>
-        <input type="text" id="key" name="key">
+        <input type="text" id="SecretAccessKey" name="SecretAccessKey">
         <label for="instanceId">Instance ID</label>
-        <input type="text" id="instanceId" name="instanceId">
-        <label for="vpnSettingsPath">VPN Settings File Path</label>
-        <input type="text" id="vpnSettingsPath" name="vpnSettingsPath">
+        <input type="text" id="InstanceId" name="InstanceId">
+        <label for="Region">Region</label>
+        <input type="text" id="Region" name="Region">
+        <label for="VpnSettingsFilePath">VPN Settings File Path</label>
+        <label for="VpnSettingsFilePath" id="currentVpnSettingsFilePath"></label>
+        <input type="file" id="VpnSettingsFilePath" name="VpnSettingsFilePath" accept=".ovpn">
         <button id="submitSettingsBtn">Save Settings</button>
     </div>
     <script>
