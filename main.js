@@ -24,7 +24,7 @@ function createMainWindow() {
         slashes: true
     }));
 
-    mainWindow.openDevTools();
+    // mainWindow.openDevTools();
 }
 
 function showSettingsWindow() {
@@ -43,9 +43,17 @@ function showSettingsWindow() {
         show: true
     });
 
+    settingsWindow.loadURL(url.format({
+        pathname: path.join(__dirname, "settings.html"),
+        protocol: "file",
+        slashes: true
+    }));
+
     settingsWindow.on("closed", function () {
         settingsOpen = false;
     });
+    // settingsWindow.openDevTools();
+
 }
 
 app.on("ready", createMainWindow);
