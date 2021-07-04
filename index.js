@@ -1,4 +1,5 @@
 console.log("from index.js");
+<<<<<<< HEAD
 const spawn = require('child_process').spawn;
 const electron = require("electron");
 const ipc = electron.ipcRenderer;
@@ -6,6 +7,11 @@ const fs = require('fs');
 const Constants = require('./src/constants');
 
 console.log("Constants file: " + Constants.SETTINGS_FILE_LOCATION);
+=======
+
+const electron = require("electron");
+const ipc = electron.ipcRenderer;
+>>>>>>> 0c0a2033ef243418b50b18611921f419347c3a1f
 
 /* AWS Setup Section */
 const { EC2Client, DescribeInstancesCommand, StartInstancesCommand, StopInstancesCommand } = require("@aws-sdk/client-ec2"); // CommonJS
@@ -86,7 +92,11 @@ async function pollForStatus(desiredState, timeout) {
         console.log(`Instance has not reached a '${desiredState}' state yet... sleeping for several seconds`);
         await delay(sleepTime);
         totalSlept += sleepTime;
+<<<<<<< HEAD
         await updateInstanceData();
+=======
+        updateInstanceData();
+>>>>>>> 0c0a2033ef243418b50b18611921f419347c3a1f
         if (totalSlept >= timeout) {
             console.error("Instance did not come up within the allotted time")
             throw "Big error bad man"
@@ -94,6 +104,7 @@ async function pollForStatus(desiredState, timeout) {
     }
 }
 
+<<<<<<< HEAD
 function connectVpn() {
     let exePath = "C:\\Program Files\\OpenVPN\\bin\\openvpn-gui.exe";
     let vpnFile = "client1.ovpn";
@@ -125,6 +136,8 @@ function updateVpnSettingsFile(ipAddress) {
         fs.writeFileSync(p, replacedData, 'utf-8');
     });
 }
+=======
+>>>>>>> 0c0a2033ef243418b50b18611921f419347c3a1f
 async function startInstance() {
     // Timeout is 5 minutes
     let timeout = 5 * 60 * 1000;
@@ -133,8 +146,14 @@ async function startInstance() {
     // If it gets to the desired state, end function
     // If it does not reach the state within 5 minutes, send an instance stop command, and display an error
     console.log("This has started working on the startInstance function")
+<<<<<<< HEAD
     try {
         await ec2Client.send(new StartInstancesCommand({
+=======
+    // Turn on instance if it isn't already on
+    try {
+        let x = await ec2Client.send(new StartInstancesCommand({
+>>>>>>> 0c0a2033ef243418b50b18611921f419347c3a1f
             InstanceIds: [instance.InstanceId]
         }));
     } catch (error) {
@@ -142,6 +161,7 @@ async function startInstance() {
     }
 
     await pollForStatus(stateEnum.Running, timeout);
+<<<<<<< HEAD
 
     let instanceData = await getInstanceState(myInstanceId);
     updateVpnSettingsFile(instanceData.PublicIpAddress);
@@ -160,6 +180,9 @@ function startSquad() {
     let exePath = "G:\\Program Files (x86)\\Steam\\steamapps\\common\\Squad\\squad_launcher.exe";
     var child = spawn(exePath);
     // attach events, etc.
+=======
+    // Get status again - Until it is "running"
+>>>>>>> 0c0a2033ef243418b50b18611921f419347c3a1f
 }
 
 async function stopInstance() {
@@ -167,8 +190,11 @@ async function stopInstance() {
 
     console.log("This has started working on the stopInstance function")
     // Then turn it off
+<<<<<<< HEAD
     disconnectVpn();
 
+=======
+>>>>>>> 0c0a2033ef243418b50b18611921f419347c3a1f
     try {
         let x = await ec2Client.send(new StopInstancesCommand({
             InstanceIds: [instance.InstanceId]
@@ -178,6 +204,10 @@ async function stopInstance() {
     }
 
     await pollForStatus(stateEnum.Stopped, timeout);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0c0a2033ef243418b50b18611921f419347c3a1f
 }
 
 // Should set up a timer function that refreshes the state of the thing every 5 seconds
