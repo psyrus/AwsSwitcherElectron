@@ -24,11 +24,7 @@ function createMainWindow() {
         slashes: true
     }));
 
-<<<<<<< HEAD
     // mainWindow.openDevTools();
-=======
-    mainWindow.openDevTools();
->>>>>>> 0c0a2033ef243418b50b18611921f419347c3a1f
 }
 
 function showSettingsWindow() {
