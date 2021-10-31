@@ -19,6 +19,11 @@
   "homepage": "https://github.com/psyrus/AwsSwitcherElectron#readme",
   "devDependencies": {
     "@aws-sdk/client-ec2": "^3.18.0",
+    "electron": "^13.1.2",
+    "electron-packager": "^15.4.0"
+  },
+  "dependencies": {
+    "@aws-sdk/client-ec2": "^3.18.0",
     "electron": "^13.1.2"
   }
 }

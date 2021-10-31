@@ -22,6 +22,10 @@ function loadSettings() {
             document.getElementById("current" + attributeName).innerText = settings[attributeName];
             continue;
         }
+        if (attributeName == "SquadLauncherFilePath") {
+            document.getElementById("current" + attributeName).innerText = settings[attributeName];
+            continue;
+        }
         document.getElementById(attributeName).value = settings[attributeName];
     }
 }
@@ -33,6 +37,7 @@ function saveSettings() {
     settings.InstanceId = document.getElementById("InstanceId").value;
     settings.Region = document.getElementById("Region").value;
     settings.VpnSettingsFilePath = document.getElementById("VpnSettingsFilePath").files[0]?.path ?? settings.VpnSettingsFilePath ?? "";
+    settings.SquadLauncherFilePath = document.getElementById("SquadLauncherFilePath").files[0]?.path ?? settings.SquadLauncherFilePath ?? "";
     console.log(settings)
 
     let data = JSON.stringify(settings, null, 2);

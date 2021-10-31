@@ -149,7 +149,6 @@ async function startInstance() {
         connectVpn();
     }
 
-    // Log location: C:\Users\Trevor\OpenVPN\log\client1.log
     // Should just read that file until it determines that it is successfully connected
     if (document.getElementById("startSquad").checked == true) {
         startSquad();
@@ -157,8 +156,12 @@ async function startInstance() {
 }
 
 function startSquad() {
-    let exePath = "G:\\Program Files (x86)\\Steam\\steamapps\\common\\Squad\\squad_launcher.exe";
-    var child = spawn(exePath);
+    let exePath = settings.SquadLauncherFilePath;
+    if (!exePath) {
+        console.log("Squad path is not set, cannot start program.");
+        return
+    }
+    let child = spawn(exePath);
     // attach events, etc.
 }
 
