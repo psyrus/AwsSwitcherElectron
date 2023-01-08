@@ -5,24 +5,24 @@ const ipc = electron.ipcRenderer;
 const fs = require('fs');
 const Constants = require('./src/constants');
 
-console.log("Constants file: " + Constants.SETTINGS_FILE_LOCATION);
 
 /* AWS Setup Section */
 const { EC2Client, DescribeInstancesCommand, StartInstancesCommand, StopInstancesCommand } = require("@aws-sdk/client-ec2"); // CommonJS
 // Set the AWS Region.
 // Create anAmazon EC2 service client object.
 const settingsFilePath = Constants.SETTINGS_FILE_LOCATION
+console.log("Constants file: " + settingsFilePath);
+if(!fs.existsSync(settingsFilePath)) {
+    // Create the blank settings file
+    fs.writeFileSync(settingsFilePath, JSON.stringify(Constants.SETTINGS_DEFAULTS));
+}
 const settings = JSON.parse(fs.readFileSync(settingsFilePath));
 process.env.AWS_ACCESS_KEY_ID = settings.AccessKeyId
 process.env.AWS_SECRET_ACCESS_KEY = settings.SecretAccessKey
-const REGION = settings.Region; //e.g. "us-east-1"
 
-const ec2Client = new EC2Client({ region: REGION });
-const dic = new DescribeInstancesCommand({});
-const myInstanceId = settings.InstanceId;
-const stateEnum = {
-    Running: "running",
-    Stopped: "stopped"
+const stateMapping = {
+    RUNNING: "running",
+    STOPPED: "stopped"
 };
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
@@ -37,6 +37,9 @@ function formatWithLeadingZero(inputValue) {
     return ('0' + inputValue).slice(-2)
 }
 async function updateInstanceData() {
+    if (myInstanceId === null) {
+        return;
+    }
     let instanceData = await getInstanceState(myInstanceId);
     document.getElementById("instanceName").innerText = instanceData.InstanceId;
     document.getElementById("instanceState").innerText = instanceData.State.Name;
@@ -63,6 +66,11 @@ function updateInstanceToggleButton(state) {
         toggleStateBtn.disabled = true;
     }
     toggleStateBtn.innerText = msg;
+}
+
+function instantiateAwsClient() {
+    const ec2Client = new EC2Client({ region: settings.Region });
+    const myInstanceId = settings.InstanceId;
 }
 
 async function getInstanceState(instanceId) {
@@ -141,7 +149,7 @@ async function startInstance() {
         console.log(error);
     }
 
-    await pollForStatus(stateEnum.Running, timeout);
+    await pollForStatus(stateMapping.RUNNING, timeout);
 
     let instanceData = await getInstanceState(myInstanceId);
     updateVpnSettingsFile(instanceData.PublicIpAddress);
@@ -180,7 +188,7 @@ async function stopInstance() {
         console.log(error);
     }
 
-    await pollForStatus(stateEnum.Stopped, timeout);
+    await pollForStatus(stateMapping.STOPPED, timeout);
 }
 
 // Should set up a timer function that refreshes the state of the thing every 5 seconds
@@ -193,9 +201,9 @@ settingsBtn.addEventListener("click", function () {
 
 toggleStateBtn.addEventListener("click", function () {
     console.log(instance.State.Name)
-    console.log(stateEnum.Running)
+    console.log(stateMapping.RUNNING)
     toggleStateBtn.disabled = true;
-    if (instance.State.Name == stateEnum.Stopped) {
+    if (instance.State.Name == stateMapping.STOPPED) {
         startInstance();
     } else {
         stopInstance();
